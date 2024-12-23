@@ -1,0 +1,16 @@
+{
+  "name": "asciiquarium",
+  "version": "1.0.0",
+  "description": "",
+  "main": "run.sh",
+  "bin": {
+    "asciiquarium": "./run.sh"
+  },
+  "scripts": {
+    "start": "./run.sh",
+    "test": "npx `pwd`"
+  },
+  "keywords": [],
+  "author": "Pate Bryant",
+  "license": "GPL-2.0-only"
+}
