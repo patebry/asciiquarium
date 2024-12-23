@@ -1,8 +1,14 @@
 {
   "name": "asciiquarium",
   "version": "1.0.0",
-  "description": "",
-  "main": "run.sh",
+  "description": "A reproduction of the asciiquarium screensaver",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/patebry/asciiquarium.git"
+  },
+  "bugs": {
+    "url": "https://github.com/patebry/asciiquarium/issues"
+  },
   "bin": {
     "asciiquarium": "./run.sh"
   },
@@ -10,7 +16,18 @@
     "start": "./run.sh",
     "test": "npx `pwd`"
   },
-  "keywords": [],
+  "keywords": [
+    "ascii",
+    "art",
+    "asciiquarium",
+    "screensaver",
+    "terminal",
+    "cli"
+  ],
   "author": "Pate Bryant",
-  "license": "GPL-2.0-only"
+  "license": "GPL-2.0-only",
+  "os": [
+    "darwin",
+    "linux"
+  ]
 }
