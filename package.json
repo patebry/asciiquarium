@@ -29,5 +29,9 @@
   "os": [
     "darwin",
     "linux"
+  ],
+  "files": [
+    "run.sh",
+    "asciiquarium"
   ]
 }
