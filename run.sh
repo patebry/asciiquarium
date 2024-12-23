@@ -24,4 +24,6 @@ if ! $PERL -MTerm::Animation -e 1 2>/dev/null; then
     exit 1
 fi
 
-perl ./asciiquarium "$@"
+# Dynamically locate asciiquarium
+SCRIPT_DIR=$(dirname "$0")
+perl "$SCRIPT_DIR/asciiquarium" "$@"
