@@ -36,7 +36,8 @@ function addShark(oldEntity, anim, classicMode) {
     position: [teethX, teethY, depth.shark + 1],
     velocity: [speed, 0],
     physical: true,
-    dieOffscreen: true,
+    // Spawns offscreen with the shark; teethCallback kills it once the shark is gone
+    dieOffscreen: false,
     callback: teethCallback
   });
 

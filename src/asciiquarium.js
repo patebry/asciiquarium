@@ -54,39 +54,33 @@ class Asciiquarium {
    * Initialize the aquarium with entities
    */
   init() {
-    try {
-      // Create screen and animation
-      this.screen = new Screen();
-      this.anim = new Animation(this.screen);
-      this.anim.classicMode = this.classicMode;
-      this.screen.onResize = () => this.handleResize();
+    // Create screen and animation
+    this.screen = new Screen();
+    this.anim = new Animation(this.screen);
+    this.anim.classicMode = this.classicMode;
+    this.screen.onResize = () => this.handleResize();
 
-      // Setup keyboard after screen is created
-      this.setupKeyboard();
+    // Setup keyboard after screen is created
+    this.setupKeyboard();
 
-      // Add environment (water surface)
-      addEnvironment(this.anim);
+    // Add environment (water surface)
+    addEnvironment(this.anim);
 
-      // Add seaweed (background)
-      addAllSeaweed(this.anim);
+    // Add seaweed (background)
+    addAllSeaweed(this.anim);
 
-      // Calculate number of fish based on screen size
-      // Formula from Perl: screen_size / 350
-      const screenSize = (this.screen.height - 9) * this.screen.width;
-      const fishCount = Math.max(1, Math.floor(screenSize / 350));
+    // Calculate number of fish based on screen size
+    // Formula from Perl: screen_size / 350
+    const screenSize = (this.screen.height - 9) * this.screen.width;
+    const fishCount = Math.max(1, Math.floor(screenSize / 350));
 
-      // Add initial fish
-      for (let i = 0; i < fishCount; i++) {
-        addFish(null, this.anim, this.classicMode);
-      }
-
-      // Add one random large object to start
-      randomObject(null, this.anim, this.classicMode);
-
-    } catch (error) {
-      console.error('Error initializing aquarium:', error);
-      throw error;
+    // Add initial fish
+    for (let i = 0; i < fishCount; i++) {
+      addFish(null, this.anim, this.classicMode);
     }
+
+    // Add one random large object to start
+    randomObject(null, this.anim, this.classicMode);
   }
 
   /**
@@ -108,14 +102,12 @@ class Asciiquarium {
             this.anim.animate();
           }
         } catch (error) {
-          console.error('Animation error:', error);
-          this.quit();
+          this.fail('Animation error:', error);
         }
       }, 100);
 
     } catch (error) {
-      console.error('Error starting animation:', error);
-      this.quit();
+      this.fail('Error starting animation:', error);
     }
   }
 
@@ -134,8 +126,10 @@ class Asciiquarium {
    * Redraw the screen
    */
   redraw() {
-    if (this.screen && this.anim) {
-      this.screen.clear();
+    if (!this.screen || !this.anim) return;
+    if (this.paused) {
+      this.anim.render();
+    } else {
       this.anim.animate();
     }
   }
@@ -153,6 +147,21 @@ class Asciiquarium {
   handleResize() {
     // On resize, redraw immediately
     this.redraw();
+  }
+
+  /**
+   * Restore the terminal, then report a fatal error so it stays visible
+   */
+  fail(message, error) {
+    this.stop();
+    try {
+      if (this.screen) this.screen.destroy();
+    } catch (e) {
+      // Ignore errors during cleanup
+    }
+    this.screen = null;
+    console.error(message, error);
+    process.exit(1);
   }
 
   /**

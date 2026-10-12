@@ -36,12 +36,6 @@ class Animation {
   animate() {
     if (this.paused) return;
 
-    // Clear screen
-    this.screen.clear();
-
-    // Sort entities by z-depth (higher z = draw first = background)
-    const sortedEntities = [...this.entities].sort((a, b) => b.position[2] - a.position[2]);
-
     // Update all entities
     for (const entity of this.entities) {
       if (!entity.alive) continue;
@@ -57,11 +51,7 @@ class Animation {
       // Check for death
       if (entity.shouldDie(this.screen.width, this.screen.height)) {
         entity.kill();
-
-        // Execute death callback
-        if (entity.deathCallback) {
-          entity.deathCallback(entity, this);
-        }
+        this.runDeathCallback(entity);
       }
 
       // Advance animation frame
@@ -87,10 +77,27 @@ class Animation {
       }
     }
 
+    // Entities killed by callbacks or collisions (e.g. fish eaten by a shark)
+    // still get their death callback before removal.
+    for (const entity of [...this.entities]) {
+      if (!entity.alive) this.runDeathCallback(entity);
+    }
+
     // Remove dead entities
     this.entities = this.entities.filter(e => e.alive);
 
-    // Render all entities (back to front)
+    this.render();
+  }
+
+  /**
+   * Draw the current entities without advancing the animation
+   */
+  render() {
+    this.screen.clear();
+
+    // Sort entities by z-depth (higher z = draw first = background)
+    const sortedEntities = [...this.entities].sort((a, b) => b.position[2] - a.position[2]);
+
     for (const entity of sortedEntities) {
       if (!entity.alive) continue;
 
@@ -106,8 +113,18 @@ class Animation {
       }
     }
 
-    // Render to screen
     this.screen.render();
+  }
+
+  /**
+   * Run an entity's death callback at most once
+   */
+  runDeathCallback(entity) {
+    if (entity.deathHandled) return;
+    entity.deathHandled = true;
+    if (entity.deathCallback) {
+      entity.deathCallback(entity, this);
+    }
   }
 
   /**

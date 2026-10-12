@@ -36,25 +36,27 @@ Version: 2.0.0-beta.1
   process.exit(0);
 }
 
-// Handle uncaught errors
-process.on('uncaughtException', (error) => {
-  console.error('\nError:', error.message);
-  console.error(error.stack);
-  process.exit(1);
-});
+let aquarium = null;
 
-process.on('unhandledRejection', (error) => {
-  console.error('\nUnhandled rejection:', error);
+// Restore the terminal before printing, or blessed's cleanup hides the message
+function fatal(message, error) {
+  try {
+    if (aquarium) aquarium.stop();
+    if (aquarium && aquarium.screen) aquarium.screen.destroy();
+  } catch (e) {
+    // Ignore errors during cleanup
+  }
+  console.error(message, error && error.stack ? error.stack : error);
   process.exit(1);
-});
+}
 
-// Create and start aquarium
+process.on('uncaughtException', (error) => fatal('\nError:', error));
+process.on('unhandledRejection', (error) => fatal('\nUnhandled rejection:', error));
+
 try {
-  const aquarium = new Asciiquarium(options);
+  aquarium = new Asciiquarium(options);
   aquarium.init();
   aquarium.start();
 } catch (error) {
-  console.error('Error starting asciiquarium:', error.message);
-  console.error(error.stack);
-  process.exit(1);
+  fatal('Error starting asciiquarium:', error);
 }

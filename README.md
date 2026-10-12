@@ -29,6 +29,7 @@ asciiquarium
 - `q` - Quit
 - `r` - Redraw screen
 - `p` - Pause/unpause animation
+- `Esc` - Quit
 - `Ctrl+C` - Quit
 
 ### Options
@@ -54,15 +55,15 @@ By default, the package still uses the Perl implementation for stability. To opt
 
 ```bash
 # Using environment variable
-ASCIIQUARIUM_IMPL=node npx asciiquarium
+ASCIIQUARIUM_IMPL=node npx asciiquarium@beta
 
-# Or use the npm script
+# Or, from a repo checkout
 npm run start:node
 ```
 
 ### Feature Parity
 
-The Node.js version is a **faithful port** with complete visual and behavioral fidelity:
+The Node.js version ports all entities from the Perl original; side-by-side visual comparison is still pending:
 
 - [x] All 18 fish variants (8 new + 10 old)
 - [x] Shark with collision detection

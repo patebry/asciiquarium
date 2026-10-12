@@ -21,6 +21,7 @@
 - Bubbles never moved, so they never reached the surface and accumulated without bound (memory growth and slowing frames).
 - Each key handler was registered twice, so `p` toggled pause twice and had no effect.
 - Terminal resize did not trigger a redraw.
+- Entities killed outside the off-screen/timeout check (fish eaten by a shark) never ran their death callback, so eaten fish were not replaced.
 
 ## Criteria for v2.0.0 Stable
 
