@@ -95,8 +95,8 @@ class Screen {
         const char = line[j];
         const colorCode = maskLine[j] || '';
 
-        // Skip spaces for transparency
-        if (char === ' ') continue;
+        // '?' is Term::Animation's transparency placeholder in the Perl art
+        if (char === ' ' || char === '?') continue;
 
         const screenX = Math.floor(x + j);
         const screenY = Math.floor(y + i);
