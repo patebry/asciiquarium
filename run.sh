@@ -1,5 +1,21 @@
 #!/bin/bash
 
+# Feature flag: set to "node" to use Node.js, "perl" for Perl (default)
+ASCIIQUARIUM_IMPL=${ASCIIQUARIUM_IMPL:-perl}
+
+# Dynamically locate script directory
+SCRIPT_DIR=$(dirname "$(readlink -f "$0")")
+
+if [ "$ASCIIQUARIUM_IMPL" = "node" ]; then
+    NODE=$(which node)
+    if [ -z "$NODE" ]; then
+        echo "Node.js not found. Install Node.js v18 or later."
+        exit 1
+    fi
+    exec node "$SCRIPT_DIR/src/index.js" "$@"
+fi
+
+# Original Perl implementation
 PERL=$(which perl)
 
 if [ -z "$PERL" ]; then
@@ -24,6 +40,4 @@ if ! $PERL -MTerm::Animation -e 1 2>/dev/null; then
     exit 1
 fi
 
-# Dynamically locate asciiquarium
-SCRIPT_DIR=$(dirname "$(readlink -f "$0")")
 perl "$SCRIPT_DIR/asciiquarium" "$@"

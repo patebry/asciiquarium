@@ -14,7 +14,14 @@
   },
   "scripts": {
     "start": "./run.sh",
-    "test": "npx `pwd`"
+    "start:node": "ASCIIQUARIUM_IMPL=node ./run.sh",
+    "start:perl": "ASCIIQUARIUM_IMPL=perl ./run.sh"
+  },
+  "dependencies": {
+    "blessed": "^0.1.81"
+  },
+  "engines": {
+    "node": ">=18"
   },
   "keywords": [
     "ascii",
@@ -32,6 +39,7 @@
   ],
   "files": [
     "run.sh",
-    "asciiquarium"
+    "asciiquarium",
+    "src/**/*"
   ]
 }
