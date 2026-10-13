@@ -2,7 +2,7 @@
 
 **Asciiquarium** is a fun and whimsical terminal-based aquarium simulation rendered in ASCII art. Watch fish, whales, sharks, and other marine creatures swim across your terminal in a delightful, retro-styled display.
 
-> Kirk Baucom's original [Asciiquarium](https://robobunny.com/projects/asciiquarium/html/) project inspired this fork.
+> This package bundles Kirk Baucom's original Perl [Asciiquarium](https://robobunny.com/projects/asciiquarium/html/), and the Node.js port reuses his art and design. Both are licensed under the GPL v2. All credit for the aquarium goes to Kirk.
 
 ## Installation and Usage
 
