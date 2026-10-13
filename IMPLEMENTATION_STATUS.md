@@ -1,6 +1,6 @@
 # Node.js Implementation Status
 
-**Version:** v2.0.0-beta.1 (opt-in via `ASCIIQUARIUM_IMPL=node`; Perl remains the default)
+**Version:** v2.0.0-beta.2 (opt-in via `ASCIIQUARIUM_IMPL=node`; Perl remains the default)
 
 ## Implemented
 

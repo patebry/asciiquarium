@@ -31,7 +31,7 @@ Keyboard controls:
   Ctrl+C          Quit
   ESC             Quit
 
-Version: 2.0.0-beta.1
+Version: 2.0.0-beta.2
 `);
   process.exit(0);
 }

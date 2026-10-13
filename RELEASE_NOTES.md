@@ -1,8 +1,12 @@
-# Release Notes - v2.0.0-beta.1
+# Release Notes - v2.0.0-beta.2
 
 ## Overview
 
-v2.0.0-beta.1 adds a Node.js implementation of asciiquarium alongside the original Perl version. The Perl version remains the default; the Node.js version is opt-in for testing and feedback.
+v2.0.0-beta.2 adds a Node.js implementation of asciiquarium alongside the original Perl version. The Perl version remains the default; the Node.js version is opt-in for testing and feedback.
+
+## Fixed in beta.2
+
+- Startup no longer dumps a blessed terminfo error ("Error on xterm-256color.Setulc") into the terminal.
 
 ## What's New
 

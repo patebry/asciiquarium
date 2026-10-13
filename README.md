@@ -108,7 +108,7 @@ The Node.js version ports all entities from the Perl original; side-by-side visu
 
 ### Roadmap
 
-- **v2.0.0-beta.1** (current): Opt-in Node.js version via flag, all entities complete
+- **v2.0.0-beta.2** (current): Opt-in Node.js version via flag, all entities complete
 - **v2.0.0**: Visual regression testing complete, switch default to Node.js
 - **v3.0.0**: Remove Perl entirely (full migration)
 

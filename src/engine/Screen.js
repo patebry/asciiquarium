@@ -7,6 +7,9 @@ const blessed = require('blessed');
 class Screen {
   constructor() {
     this.screen = blessed.screen({
+      // blessed cannot compile newer terminfo extensions such as Setulc and
+      // prints the failure to the terminal, so skip extended capabilities.
+      program: blessed.program({ extended: false, forceUnicode: true }),
       smartCSR: false,  // Disable smart cursor to prevent glitches
       fullUnicode: true,
       forceUnicode: true
